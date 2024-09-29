@@ -1,0 +1,26 @@
+{
+  "name": "info701back",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node --env-file=.env app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TomyElPapel/Info701Back.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TomyElPapel/Info701Back/issues"
+  },
+  "homepage": "https://github.com/TomyElPapel/Info701Back#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.0",
+    "fs": "^0.0.1-security",
+    "info701back": "file:",
+    "path": "^0.12.7",
+    "sequelize": "^6.37.3"
+  }
+}
