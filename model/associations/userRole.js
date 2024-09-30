@@ -1,6 +1,3 @@
-const { DataTypes } = require("sequelize");
-
-
 module.exports = (sequelize) => {
     const User = sequelize.models.User;
     const Role = sequelize.models.Role;

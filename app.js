@@ -5,10 +5,11 @@ const sequelize = require("./src/sequelizeSetup");
 
 
 const app = express();
+app.use(express.json());
+
 const port = process.env.PORT;
 
 const routesDir = path.join(__dirname, "routes");
-const entitiesDir = path.join(__dirname, "entities");
 
 routerSetup(routesDir, app, "/api/");
 

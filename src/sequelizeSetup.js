@@ -15,9 +15,6 @@ setupEntities("./model/associations", sequelize);
 sequelize.sync({ alter: true });
 
 
-console.log(sequelize.models);
-
-
 function setupEntities(entitiesDirPath, sequelize) {
     const files = fs.readdirSync(entitiesDirPath);
 
