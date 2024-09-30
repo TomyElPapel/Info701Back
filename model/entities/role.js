@@ -1,9 +1,9 @@
 const { DataTypes } = require("sequelize") ;
 
 
-module.exports = async function entitySetup(sequelize) {
+module.exports = async function(sequelize) {
     sequelize.define(
-        'User',
+        'Role',
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -11,7 +11,6 @@ module.exports = async function entitySetup(sequelize) {
                 primaryKey: true,
             },
             name: DataTypes.STRING,
-            age: DataTypes.INTEGER
         }
     );
 };
