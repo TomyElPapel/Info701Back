@@ -1,6 +1,9 @@
 PORT=3000
 
 
+> require('crypto').randomBytes(64).toString('hex')
+JWT_TOKEN=
+
 DATABASE_NAME=
 DATABASE_USER=
 DATABASE_HOST=

@@ -3,14 +3,18 @@ const { DataTypes } = require("sequelize") ;
 
 module.exports = async function(sequelize) {
     sequelize.define(
-        'Car',
+        'Employee',
         {
             id: {
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
                 primaryKey: true,
             },
-            model: DataTypes.STRING,
+            firstname: DataTypes.STRING,
+            lastname: DataTypes.STRING,
+            age: DataTypes.INTEGER,
+            mail: DataTypes.STRING,
+            password: DataTypes.STRING
         }
     );
 };

@@ -3,7 +3,7 @@ const { DataTypes } = require("sequelize") ;
 
 module.exports = async function(sequelize) {
     sequelize.define(
-        'Building',
+        'Store',
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -11,7 +11,7 @@ module.exports = async function(sequelize) {
                 primaryKey: true,
             },
             name: DataTypes.STRING,
-            size: DataTypes.INTEGER
+            adress: DataTypes.STRING
         }
     );
 };
