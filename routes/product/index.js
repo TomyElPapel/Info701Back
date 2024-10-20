@@ -49,9 +49,7 @@ router.get("/:productId", async (req, res, err) => {
     const storeId = req.params.storeId;
 
     try {
-        const store = await models.Product.findByPk(storeId, {
-            include: models.Product
-        });
+        const product_id = await models.Product.findByPk()
 
         const products = await store.getProducts({ joinTableAttributes: ["quantity"] });
 
