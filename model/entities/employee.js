@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize") ;
 
 
 module.exports = async function(sequelize) {
-    sequelize.define(
+    const User = sequelize.define(
         'Employee',
         {
             id: {
@@ -17,4 +17,5 @@ module.exports = async function(sequelize) {
             password: DataTypes.STRING
         }
     );
+
 };

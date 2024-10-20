@@ -6,12 +6,16 @@ module.exports = async function(sequelize) {
         'Product',
         {
             id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true
+            },
+            ref: {
                 type: DataTypes.STRING,
                 unique: true,
-                primaryKey: true,
             },
             name: DataTypes.STRING,
-            price: DataTypes.FLOAT
+            unitPrice: DataTypes.FLOAT
         }
     );
 };

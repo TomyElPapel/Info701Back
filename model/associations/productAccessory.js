@@ -9,7 +9,7 @@ module.exports = async function(sequelize) {
         "ProductAccessory",
         {
             product_id: {
-                type: DataTypes.STRING,
+                type: DataTypes.INTEGER,
                 references: {
                     model: Product,
                     key: "id"
