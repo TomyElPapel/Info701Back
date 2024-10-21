@@ -5,7 +5,12 @@ const { models } = require("../../src/sequelizeSetup");
 
 router.get("/all", async (req, res, err) => {
     try {
-        const products = await models.Product.findAll();
+        const products = await models.Product.findAll({
+            include: [
+                models.Color,
+                models.Accessory
+            ]
+        });
         res.status(200).json(products);
     } catch(e) {
         res.status(400).json(e);
@@ -34,10 +39,19 @@ router.get("/all/:storeId", async (req, res, err) => {
 
     try {
         const store = await models.Store.findByPk(storeId, {
-            include: models.Product
+            include: {
+                model : models.Product,
+                through: {
+                    attributes: ['quantity'],
+                },
+                include: [
+                    models.Color,
+                    models.Accessory,
+                ]
+            }
         });
 
-        const products = await store.getProducts({ joinTableAttributes: ["quantity"] });
+        const products = await store.Products;
 
         res.status(200).json(products);
     } catch(e) {

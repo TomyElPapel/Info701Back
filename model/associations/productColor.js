@@ -6,4 +6,5 @@ module.exports = async function(sequelize) {
     const Product = sequelize.models.Product;
 
     Color.belongsTo(Product);
+    Product.hasMany(Color);
 }
