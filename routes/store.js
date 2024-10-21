@@ -13,7 +13,7 @@ router.get("/all", async (req, res, err) => {
 });
 
 
-router.post("/create", async (req, res, err) => {
+router.post("/", async (req, res, err) => {
     const body = req.body;
 
     try {
