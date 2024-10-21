@@ -3,8 +3,6 @@ const fs =  require("fs");
 
 
 async function routerSetup(routesPath, app, basePath) {
-    console.log("ratio");
-
     fs.readdir(routesPath, async (err, files) => {
         files.forEach(async (file) => {
             let filePath = path.join(routesPath, file);
@@ -18,7 +16,6 @@ async function routerSetup(routesPath, app, basePath) {
                     } else {
                         p = basePath + file.slice(0, -3);
                     }
-                    console.log(p);
                     app.use(p, router);
                 } else if (stats.isDirectory()) {
                     await routerSetup(filePath, app, basePath + file + "/");

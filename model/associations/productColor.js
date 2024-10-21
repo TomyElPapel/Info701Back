@@ -5,5 +5,5 @@ module.exports = async function(sequelize) {
     const Color = sequelize.models.Color;
     const Product = sequelize.models.Product;
 
-    Color.belongsTo(Product, { foreignKey: "product_id"})
+    Color.belongsTo(Product);
 }

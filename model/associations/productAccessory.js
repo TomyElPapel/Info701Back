@@ -5,31 +5,14 @@ module.exports = async function(sequelize) {
     const Accessory = sequelize.models.Accessory;
     const Product = sequelize.models.Product;
 
-    sequelize.define(
-        "ProductAccessory",
-        {
-            product_id: {
-                type: DataTypes.INTEGER,
-                references: {
-                    model: Product,
-                    key: "id"
-                } 
-            },
-            accessory_id: {
-                type: DataTypes.INTEGER,
-                references: {
-                    model: Accessory,
-                    key: "id"
-                } 
-            },
-        }, 
-        {
-            tableName: "ProductAccessories",
-            createdAt: false,
-            updatedAt: false
-        }
-    );
 
-    Accessory.belongsToMany(Product, { through: "ProductAccessory", foreignKey: "accessory_id" });
-    Product.belongsToMany(Accessory, { through: "ProductAccessory", foreignKey: "product_id" });
+    Accessory.belongsToMany(Product, { through: "ProductAccessory" });
+    Product.belongsToMany(Accessory, { through: "ProductAccessory" });
+
+    const ProductAccessory = sequelize.models.ProductAccessory;
+
+    Product.hasMany(ProductAccessory);
+    ProductAccessory.belongsTo(Product);
+    Accessory.hasMany(ProductAccessory);
+    ProductAccessory.belongsTo(Accessory);
 }
