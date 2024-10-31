@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Green Valley Grocery",
+        "address": "123 Maple Street, Springfield, IL 62701"
+    },
+    {
+        "name": "City Lights Bookstore",
+        "address": "456 Elm Street, San Francisco, CA 94110"
+    },
+    {
+        "name": "Sunset Coffee House",
+        "address": "789 Sunset Blvd, Los Angeles, CA 90028"
+    },
+    {
+        "name": "Central Hardware Store",
+        "address": "101 Pine Avenue, Austin, TX 73301"
+    },
+    {
+        "name": "The Corner Pharmacy",
+        "address": "202 Oak Drive, Denver, CO 80203"
+    }
+]

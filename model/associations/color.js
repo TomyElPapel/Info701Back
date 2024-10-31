@@ -4,7 +4,7 @@ const { DataTypes } = require("sequelize") ;
 module.exports = async function(sequelize) {
     const Product = sequelize.models.Product;
 
-    sequelize.define(
+    const Color = sequelize.define(
         "Color",
         {
             id: {
@@ -14,5 +14,12 @@ module.exports = async function(sequelize) {
             },
             name: DataTypes.STRING
         },
+        {
+            createdAt: false,
+            updatedAt: false
+        }
     );
+
+    Color.belongsTo(Product);
+    Product.hasMany(Color);
 }

@@ -4,6 +4,7 @@ const routerSetup = require("./src/routerSetup");
 const sequelize = require("./src/sequelize");
 
 (async () => {
+    await sequelize.sync({alter:true});
 
     const app = express();
     app.use(express.json());

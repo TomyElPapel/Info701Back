@@ -19,10 +19,4 @@ module.exports = async function(sequelize) {
 
     Accessory.belongsToMany(Product, { through: ProductAccessory });
     Product.belongsToMany(Accessory, { through: ProductAccessory });
-
-
-    Product.hasMany(ProductAccessory);
-    ProductAccessory.belongsTo(Product);
-    Accessory.hasMany(ProductAccessory);
-    ProductAccessory.belongsTo(Accessory);
 }

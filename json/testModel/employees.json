@@ -1,0 +1,281 @@
+[
+    {
+        "firstname": "Emma",
+        "lastname": "Johnson",
+        "age": 28,
+        "mail": "emma.johnson@example.com",
+        "password": "password",
+        "roles": ["shopAssistant"],
+        "store": 1
+    },
+    {
+        "firstname": "Liam",
+        "lastname": "Brown",
+        "age": 34,
+        "mail": "liam.brown@example.com",
+        "password": "password",
+        "roles": ["shopAssistant"],
+        "store": 1
+    },
+    {
+        "firstname": "Olivia",
+        "lastname": "Williams",
+        "age": 29,
+        "mail": "olivia.williams@example.com",
+        "password": "password",
+        "roles": ["commercialManager"],
+        "store": 1
+    },
+    {
+        "firstname": "Sophia",
+        "lastname": "Garcia",
+        "age": 26,
+        "mail": "sophia.garcia@example.com",
+        "password": "password",
+        "roles": ["accessorist"],
+        "store": 1
+    },
+    {
+        "firstname": "James",
+        "lastname": "Martinez",
+        "age": 45,
+        "mail": "james.martinez@example.com",
+        "password": "password",
+        "roles": ["productExperts"],
+        "store": 1
+    },
+    {
+        "firstname": "Ava",
+        "lastname": "Miller",
+        "age": 31,
+        "mail": "ava.miller@example.com",
+        "password": "password",
+        "roles": ["shopAssistant"],
+        "store": 2
+    },
+    {
+        "firstname": "Lucas",
+        "lastname": "Hernandez",
+        "age": 37,
+        "mail": "lucas.hernandez@example.com",
+        "password": "password",
+        "roles": ["shopAssistant"],
+        "store": 2
+    },
+    {
+        "firstname": "Ethan",
+        "lastname": "White",
+        "age": 40,
+        "mail": "ethan.white@example.com",
+        "password": "password",
+        "roles": ["commercialManager"],
+        "store": 2
+    },
+    {
+        "firstname": "Mia",
+        "lastname": "Rodriguez",
+        "age": 22,
+        "mail": "mia.rodriguez@example.com",
+        "password": "password",
+        "roles": ["accessorist"],
+        "store": 2
+    },
+    {
+        "firstname": "Amelia",
+        "lastname": "Lopez",
+        "age": 30,
+        "mail": "amelia.lopez@example.com",
+        "password": "password",
+        "roles": ["productExperts"],
+        "store": 2
+    },
+    {
+        "firstname": "William",
+        "lastname": "Anderson",
+        "age": 32,
+        "mail": "william.anderson@example.com",
+        "password": "password",
+        "roles": ["shopAssistant"],
+        "store": 3
+    },
+    {
+        "firstname": "Emily",
+        "lastname": "Thomas",
+        "age": 27,
+        "mail": "emily.thomas@example.com",
+        "password": "password",
+        "roles": ["shopAssistant"],
+        "store": 3
+    },
+    {
+        "firstname": "Benjamin",
+        "lastname": "Moore",
+        "age": 39,
+        "mail": "benjamin.moore@example.com",
+        "password": "password",
+        "roles": ["commercialManager"],
+        "store": 3
+    },
+    {
+        "firstname": "Grace",
+        "lastname": "Jackson",
+        "age": 25,
+        "mail": "grace.jackson@example.com",
+        "password": "password",
+        "roles": ["accessorist"],
+        "store": 3
+    },
+    {
+        "firstname": "Daniel",
+        "lastname": "Martin",
+        "age": 41,
+        "mail": "daniel.martin@example.com",
+        "password": "password",
+        "roles": ["productExperts"],
+        "store": 3
+    },
+    {
+        "firstname": "Hannah",
+        "lastname": "Clark",
+        "age": 30,
+        "mail": "hannah.clark@example.com",
+        "password": "password",
+        "roles": ["shopAssistant"],
+        "store": 4
+    },
+    {
+        "firstname": "Michael",
+        "lastname": "Rodgers",
+        "age": 33,
+        "mail": "michael.rodgers@example.com",
+        "password": "password",
+        "roles": ["shopAssistant"],
+        "store": 4
+    },
+    {
+        "firstname": "Abigail",
+        "lastname": "Hughes",
+        "age": 36,
+        "mail": "abigail.hughes@example.com",
+        "password": "password",
+        "roles": ["commercialManager"],
+        "store": 4
+    },
+    {
+        "firstname": "Evelyn",
+        "lastname": "Baker",
+        "age": 29,
+        "mail": "evelyn.baker@example.com",
+        "password": "password",
+        "roles": ["accessorist"],
+        "store": 4
+    },
+    {
+        "firstname": "Jack",
+        "lastname": "Reed",
+        "age": 44,
+        "mail": "jack.reed@example.com",
+        "password": "password",
+        "roles": ["productExperts"],
+        "store": 4
+    },
+    {
+        "firstname": "Scarlett",
+        "lastname": "Mitchell",
+        "age": 31,
+        "mail": "scarlett.mitchell@example.com",
+        "password": "password",
+        "roles": ["shopAssistant"],
+        "store": 5
+    },
+    {
+        "firstname": "Alexander",
+        "lastname": "Perez",
+        "age": 38,
+        "mail": "alexander.perez@example.com",
+        "password": "password",
+        "roles": ["shopAssistant"],
+        "store": 5
+    },
+    {
+        "firstname": "Ella",
+        "lastname": "Carter",
+        "age": 26,
+        "mail": "ella.carter@example.com",
+        "password": "password",
+        "roles": ["commercialManager"],
+        "store": 5
+    },
+    {
+        "firstname": "Isabella",
+        "lastname": "Murphy",
+        "age": 24,
+        "mail": "isabella.murphy@example.com",
+        "password": "password",
+        "roles": ["accessorist"],
+        "store": 5
+    },
+    {
+        "firstname": "Henry",
+        "lastname": "Ortiz",
+        "age": 48,
+        "mail": "henry.ortiz@example.com",
+        "password": "password",
+        "roles": ["productExperts"],
+        "store": 5
+    },
+    {
+        "firstname": "Luke",
+        "lastname": "Griffin",
+        "age": 35,
+        "mail": "luke.griffin@example.com",
+        "password": "password",
+        "roles": ["transporter"],
+        "store": -1
+    },
+    {
+        "firstname": "Chloe",
+        "lastname": "Young",
+        "age": 23,
+        "mail": "chloe.young@example.com",
+        "password": "password",
+        "roles": ["transporter"],
+        "store": -1
+    },
+    {
+        "firstname": "Dylan",
+        "lastname": "Sanders",
+        "age": 39,
+        "mail": "dylan.sanders@example.com",
+        "password": "password",
+        "roles": ["transporter"],
+        "store": -1
+    },
+    {
+        "firstname": "Aiden",
+        "lastname": "Bell",
+        "age": 43,
+        "mail": "aiden.bell@example.com",
+        "password": "password",
+        "roles": ["secretary"],
+        "store": -1
+    },
+    {
+        "firstname": "Megan",
+        "lastname": "Cruz",
+        "age": 32,
+        "mail": "megan.cruz@example.com",
+        "password": "password",
+        "roles": ["secretary"],
+        "store": -1
+    },
+    {
+        "firstname": "Natalie",
+        "lastname": "Stewart",
+        "age": 37,
+        "mail": "natalie.stewart@example.com",
+        "password": "password",
+        "roles": ["financialManager"],
+        "store": -1
+    }
+]

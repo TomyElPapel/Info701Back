@@ -1,0 +1,207 @@
+[
+    {
+        "ref": "DESK001",
+        "name": "ErgoDesk Classic",
+        "unitPrice": 199.99,
+        "colors": ["Black", "White"],
+        "stocks": [
+            {
+                "store": 1,
+                "quantity": 10
+            },
+            {
+                "store": 3,
+                "quantity": 5
+            }
+        ],
+        "accessories": [
+            {
+                "name": "Cable Management Tray",
+                "price": 20.0
+            },
+            {
+                "name": "Monitor Stand",
+                "price": 25.0
+            }
+        ]
+    },
+    {
+        "ref": "DESK002",
+        "name": "ProDesk Adjustable",
+        "unitPrice": 299.99,
+        "colors": ["Gray"],
+        "stocks": [
+            {
+                "store": 2,
+                "quantity": 8
+            },
+            {
+                "store": 4,
+                "quantity": 3
+            }
+        ],
+        "accessories": [
+            {
+                "name": "USB Hub",
+                "price": 15.0
+            }
+        ]
+    },
+    {
+        "ref": "DESK003",
+        "name": "HomeDesk Compact",
+        "unitPrice": 159.99,
+        "colors": ["Oak", "Walnut"],
+        "stocks": [
+            {
+                "store": 5,
+                "quantity": 12
+            }
+        ],
+        "accessories": []
+    },
+    {
+        "ref": "DESK004",
+        "name": "StandUp Desk",
+        "unitPrice": 249.99,
+        "colors": ["Black", "Mahogany", "White"],
+        "stocks": [
+            {
+                "store": 1,
+                "quantity": 7
+            },
+            {
+                "store": 3,
+                "quantity": 6
+            }
+        ],
+        "accessories": [
+            {
+                "name": "Desk Lamp",
+                "price": 18.0
+            }
+        ]
+    },
+    {
+        "ref": "DESK005",
+        "name": "EcoDesk Bamboo",
+        "unitPrice": 179.99,
+        "colors": ["Natural Bamboo"],
+        "stocks": [
+            {
+                "store": 2,
+                "quantity": 4
+            },
+            {
+                "store": 5,
+                "quantity": 10
+            }
+        ],
+        "accessories": []
+    },
+    {
+        "ref": "DESK006",
+        "name": "ExecutiveDesk Pro",
+        "unitPrice": 399.99,
+        "colors": ["Cherry", "Ebony"],
+        "stocks": [
+            {
+                "store": 3,
+                "quantity": 2
+            },
+            {
+                "store": 4,
+                "quantity": 7
+            }
+        ],
+        "accessories": [
+            {
+                "name": "Wireless Charger",
+                "price": 30.0
+            },
+            {
+                "name": "Keyboard Tray",
+                "price": 15.0
+            }
+        ]
+    },
+    {
+        "ref": "DESK007",
+        "name": "CompactDesk Lite",
+        "unitPrice": 119.99,
+        "colors": [],
+        "stocks": [
+            {
+                "store": 1,
+                "quantity": 15
+            },
+            {
+                "store": 2,
+                "quantity": 10
+            }
+        ],
+        "accessories": [
+            {
+                "name": "Mouse Pad",
+                "price": 5.0
+            }
+        ]
+    },
+    {
+        "ref": "DESK008",
+        "name": "FlexDesk Duo",
+        "unitPrice": 229.99,
+        "colors": ["Gray", "Black"],
+        "stocks": [
+            {
+                "store": 5,
+                "quantity": 6
+            },
+            {
+                "store": 3,
+                "quantity": 4
+            }
+        ],
+        "accessories": [
+            {
+                "name": "Under Desk Drawer",
+                "price": 20.0
+            }
+        ]
+    },
+    {
+        "ref": "DESK009",
+        "name": "MaxDesk 2000",
+        "unitPrice": 459.99,
+        "colors": ["Black", "White", "Gray", "Walnut"],
+        "stocks": [
+            {
+                "store": 4,
+                "quantity": 5
+            }
+        ],
+        "accessories": []
+    },
+    {
+        "ref": "DESK010",
+        "name": "UrbanDesk Minimal",
+        "unitPrice": 139.99,
+        "colors": ["Oak"],
+        "stocks": [
+            {
+                "store": 2,
+                "quantity": 8
+            },
+            {
+                "store": 5,
+                "quantity": 12
+            }
+        ],
+        "accessories": [
+            {
+                "name": "Desk Mat",
+                "price": 10.0
+            }
+        ]
+    }
+]

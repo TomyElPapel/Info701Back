@@ -4,6 +4,8 @@ const router = express.Router();
 const { models } = require("../../src/sequelize");
 
 
+// ya rien de bon
+
 router.post("/",  async (req, res, err) => {
     const productId = req.body.productId;
     const storeId = req.body.storeId;

@@ -1,11 +1,8 @@
 const { Sequelize } = require('sequelize');
 const fs = require("fs");
 const path = require("path");
-const createDatabase = require("./createDatabase");
 
-async function setupSequilize(reset=false) {
-    await createDatabase();
-
+function setupSequilize(reset=false) {
     const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USER, process.env.DATABASE_PASSWORD, {
         host: process.env.DATABASE_HOST,
         port: process.env.DATABASE_PORT,
@@ -16,12 +13,6 @@ async function setupSequilize(reset=false) {
     setupEntities("./model/entities", sequelize);
     setupEntities("./model/associations", sequelize);
     setupEntities("./model/deliveries",sequelize);
-
-    if (reset) {
-        await sequelize.sync({ force: true });
-    } else {
-        await sequelize.sync({ alter: true });
-    }
 
     return sequelize;
 }
