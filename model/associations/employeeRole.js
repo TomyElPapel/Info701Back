@@ -1,18 +1,21 @@
 const { DataTypes } = require("sequelize") ;
-
+const Roles = require("../enum/roles");
 
 module.exports = async function(sequelize) {
     const Employee = sequelize.models.Employee;
-    const Role = sequelize.models.Role;
 
-
-    Role.belongsToMany(Employee, { through: "EmployeeRole" });
-    Employee.belongsToMany(Role, { through: "EmployeeRole" });
-
-    const EmployeeRole = sequelize.models.EmployeeRole;
+    const EmployeeRole = sequelize.define(
+        "EmployeeRoles",
+        {
+            role : DataTypes.ENUM(Roles.All)
+        }, 
+        {
+            createdAt: false,
+            updatedAt: false,
+            tableName: 'Employee_Roles'
+        }
+    );
 
     Employee.hasMany(EmployeeRole);
     EmployeeRole.belongsTo(Employee);
-    Role.hasMany(EmployeeRole);
-    EmployeeRole.belongsTo(Role);
 }

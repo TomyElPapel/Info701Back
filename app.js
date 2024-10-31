@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const routerSetup = require("./src/routerSetup");
-const sequelize = require("./src/sequelizeSetup");
+const sequelize = require("./src/sequelize");
 
 (async () => {
 

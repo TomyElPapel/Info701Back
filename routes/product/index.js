@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { models } = require("../../src/sequelizeSetup");
+const { models } = require("../../src/sequelize");
 
 router.get("/all", async (req, res, err) => {
     try {
