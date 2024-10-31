@@ -12,7 +12,7 @@ module.exports = async function(sequelize) {
             },
             ref: {
                 type: DataTypes.STRING,
-                unique: true,
+                unique: false,
             },
             name: DataTypes.STRING,
             unitPrice: DataTypes.FLOAT

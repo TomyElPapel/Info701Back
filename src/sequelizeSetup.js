@@ -12,6 +12,7 @@ const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_
 
 setupEntities("./model/entities", sequelize);
 setupEntities("./model/associations", sequelize);
+setupEntities("./model/deliveries",sequelize);
 
 sequelize.sync({ alter: true });
 

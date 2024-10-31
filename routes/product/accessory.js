@@ -30,6 +30,7 @@ router.get("/:productId",  async (req, res, err) => {
 router.post("/add",  async (req, res, err) => {
     const productId = req.body.productId;
     const name = req.body.name;
+    
 
     try {
         const product = await models.Product.findByPk(productId);
