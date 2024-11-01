@@ -10,9 +10,10 @@ function setupSequilize(reset=false) {
         logging: (msg) => {},
     });
 
-    setupEntities("./model/entities", sequelize);
-    setupEntities("./model/associations", sequelize);
-    setupEntities("./model/deliveries",sequelize);
+    setupEntities("./models/entities", sequelize);
+    setupEntities("./models/associations", sequelize);
+    setupEntities("./models/deliveries",sequelize);
+    setupEntities("./models/notifications",sequelize);
 
     return sequelize;
 }

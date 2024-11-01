@@ -7,8 +7,8 @@ module.exports = async function(sequelize) {
     const Store = sequelize.models.Store;
     const Employee = sequelize.models.Employee;
 
-    const Store_Delivery = sequelize.define(
-        'Store_Delivery',
+    const StoreDelivery = sequelize.define(
+        'StoreDelivery',
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -23,11 +23,11 @@ module.exports = async function(sequelize) {
         },
     );
 
-    Store_Delivery.belongsTo(Store, { as : "StoreFrom" });
-    Store_Delivery.belongsTo(Store, { as : "StoreTo" });
+    StoreDelivery.belongsTo(Store, { as : "StoreFrom" });
+    StoreDelivery.belongsTo(Store, { as : "StoreTo" });
     
-    Store_Delivery.belongsTo(Employee, { as : "Transporter" });
-    Store_Delivery.belongsTo(Employee, { as : "Creator" });
+    StoreDelivery.belongsTo(Employee, { as : "Transporter" });
+    StoreDelivery.belongsTo(Employee, { as : "Creator" });
 
-    Store_Delivery.belongsTo(Product, { as : "Product" });
+    StoreDelivery.belongsTo(Product, { as : "Product" });
 };

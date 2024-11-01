@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { addStock, removeStock, setStock } = require("../../service/stockService")
+const { addStock, removeStock, setStock } = require("../../services/stockService")
 
 
 router.post("/add",  async (req, res, err) => {

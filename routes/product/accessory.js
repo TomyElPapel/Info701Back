@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { findByProduct } = require("../../service/accessoryService");
+const { findByProduct } = require("../../services/accessoryService");
 
 
 router.get("/:productId",  async (req, res, err) => {

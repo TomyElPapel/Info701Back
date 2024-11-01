@@ -9,8 +9,8 @@ module.exports = async function(sequelize) {
     const Color = sequelize.models.Color;
     const Accessory = sequelize.models.Accessory;
 
-    const Client_Delivery = sequelize.define(
-        'Client_Delivery',
+    const ClientDelivery = sequelize.define(
+        'ClientDelivery',
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -28,13 +28,13 @@ module.exports = async function(sequelize) {
         },
     );
 
-    Client_Delivery.belongsTo(Store);
-    Store.hasMany(Client_Delivery);
+    ClientDelivery.belongsTo(Store);
+    Store.hasMany(ClientDelivery);
 
-    Client_Delivery.belongsTo(Employee, { as : "Transporter" });
-    Client_Delivery.belongsTo(Employee, { as : "Creator" });
+    ClientDelivery.belongsTo(Employee, { as : "Transporter" });
+    ClientDelivery.belongsTo(Employee, { as : "Creator" });
 
-    Client_Delivery.belongsTo(Product);
-    Client_Delivery.belongsTo(Color);
-    Client_Delivery.belongsTo(Accessory);
+    ClientDelivery.belongsTo(Product);
+    ClientDelivery.belongsTo(Color);
+    ClientDelivery.belongsTo(Accessory);
 };

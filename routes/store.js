@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { findAll, findById } = require("../service/storeService");
+const { findAll, findById } = require("../services/storeService");
 
 router.get("/all", async (req, res, err) => {
     try {

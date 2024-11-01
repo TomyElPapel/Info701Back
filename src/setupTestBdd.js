@@ -12,12 +12,12 @@ const employees = require("../json/testModel/employees.json");
 async function main() {
     const sequelize =  setupBdd(true) 
     const models = sequelize.models;
-    
+
     await dropAllTable();
     await sequelize.sync({force: true});
 
-    const storeService = require("../service/storeService");
-    const employeeService = require("../service/employeeService");
+    const storeService = require("../services/storeService");
+    const employeeService = require("../services/employeeService");
     
     for (let s of stores) {
         await storeService.create(s.name, s.address);
@@ -36,9 +36,9 @@ async function main() {
 
 
 async function createProducts(productsJson) {
-    const stockService = require("../service/stockService");
-    const productService = require("../service/productService");
-    const accessoryService = require("../service/accessoryService");
+    const stockService = require("../services/stockService");
+    const productService = require("../services/productService");
+    const accessoryService = require("../services/accessoryService");
 
     for (let p of productsJson) {
         let product = await productService.create(p.ref, p.name, p.unitPrice, p.colors)

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const NotificationStatus = require("../../model/enum/notifactionStatus")
+const NotificationStatus = require("../../models/enum/notifactionStatus")
 
 router.get("/", async (req, res, err) => {
     console.log(NotificationStatus.All);
