@@ -16,9 +16,9 @@ module.exports = async function(sequelize) {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            date: DataTypes.TIME,
-            type : DataTypes.ENUM(NotificationTypes.All),
-            stat : DataTypes.ENUM(NotificationStats.All)
+            date: { type : DataTypes.TIME, defaultValue : DataTypes.NOW },
+            type : { type : DataTypes.ENUM(NotificationTypes.All), defaultValue : NotificationTypes.storeDelivery },
+            stat : { type : DataTypes.ENUM(NotificationStats.All), defaultValue : NotificationStats.waiting }
         },
         {
             tableName: 'Store_Delivery_Notifications',
@@ -30,4 +30,7 @@ module.exports = async function(sequelize) {
 
     StoreDeliveryNotification.belongsTo(StoreDelivery);
     StoreDelivery.hasMany(StoreDeliveryNotification);
+
+    StoreDelivery.belongsToMany(Employee, { through : StoreDeliveryNotification });
+    Employee.belongsToMany(StoreDelivery, { through : StoreDeliveryNotification });
 };

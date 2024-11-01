@@ -1,34 +1,36 @@
 const express = require("express");
 const router = express.Router();
 
-const { models } = require("../../src/sequelize");
+const { create, findByStore } = require("../../services/deliveries/clientDeliveryService")
 
 
-// ya rien de bon
 
 router.post("/",  async (req, res, err) => {
-    const productId = req.body.productId;
-    const storeId = req.body.storeId;
-    const clientFirstName = req.body.clientFirstName;
-    const clientLastName = req.body.clientLastName;
-    const employeeId = req.body.employeeId;
+    const {
+        clientFirstName,
+        clientLastName,
+        adress,
+        storeId,
+        productId,
+        colorId,
+        accessoryId,
+        creatorId
+    } = req.body;
 
     try {
-        await models.Client_Delivery.create({
-            name: name,
-            price: price
-        });
-
+        await create(clientFirstName, clientLastName, adress, storeId, productId, colorId, accessoryId, creatorId);
         res.sendStatus(201);
     } catch(e) {
         res.status(400).json(e)
     }
 });
 
-router.get("/all", async (req, res, err) => {
+router.get("/all/:storeId", async (req, res, err) => {
+    const { storeId } = req.params
+
     try {
-        const accessories = await models.Accessory.findAll();
-        res.status(200).json(accessories);
+        const deliveries = await findByStore(storeId);
+        res.status(200).json(deliveries);
     } catch(e) {
         console.log(e)
 
@@ -36,21 +38,6 @@ router.get("/all", async (req, res, err) => {
     }
 });
 
-router.get("/:id",  async (req, res, err) => {
-    const id = req.params.id;
-
-    try {
-        const accessory = await models.Accessory.findByPk(id);
-
-        if (accessory) {
-            res.status(200).json(accessory);
-        } else {
-            res.sendStatus(404);
-        }
-    } catch(e) {
-        res.status(400).json(e)
-    }
-});
 
 
 module.exports = router;

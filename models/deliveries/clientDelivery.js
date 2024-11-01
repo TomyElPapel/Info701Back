@@ -21,7 +21,7 @@ module.exports = async function(sequelize) {
             clientFirstName: DataTypes.STRING,
             clientLastName: DataTypes.STRING,
             deliveryAdress: DataTypes.STRING,
-            stat : DataTypes.ENUM(ClientDeliveryStats.All)
+            stat : { type : DataTypes.ENUM(ClientDeliveryStats.All), defaultValue : ClientDeliveryStats.waitingForCommercialManager }
         },
         {
             tableName: 'Client_Deliveries',

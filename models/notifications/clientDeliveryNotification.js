@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize") ;
 const NotificationTypes = require("../enum/notificationTypes");
 const NotificationStats = require("../enum/NotificationStats");
+const ClientDeliveryStats = require("../enum/clientDeliveryStats")
 
 
 module.exports = async function(sequelize) {
@@ -16,9 +17,10 @@ module.exports = async function(sequelize) {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            date: DataTypes.TIME,
-            type : DataTypes.ENUM(NotificationTypes.All),
-            stat : DataTypes.ENUM(NotificationStats.All)
+            date: { type : DataTypes.TIME, defaultValue : DataTypes.NOW },
+            type : { type : DataTypes.ENUM(NotificationTypes.All), defaultValue : NotificationTypes.clientDelivery },
+            stat : { type : DataTypes.ENUM(NotificationStats.All), defaultValue : NotificationStats.waiting },
+            deliveryStat : DataTypes.ENUM(ClientDeliveryStats.All)
         },
         {
             tableName: 'Client_Delivery_Notifications',
@@ -30,5 +32,8 @@ module.exports = async function(sequelize) {
 
     ClientDeliveryNotification.belongsTo(ClientDelivery);
     ClientDelivery.hasMany(ClientDeliveryNotification);
+
+    ClientDelivery.belongsToMany(Employee, { through : ClientDeliveryNotification });
+    Employee.belongsToMany(ClientDelivery, { through : ClientDeliveryNotification });
 };
 

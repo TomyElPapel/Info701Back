@@ -1,5 +1,5 @@
 const { models } = require("../src/sequelize");
-const { Employee, Store } = models;
+const { Employee, Store, Role } = models;
 
 
 async function create(firstname, lastname, age, mail, password, roles, storesId) {
@@ -27,8 +27,36 @@ async function create(firstname, lastname, age, mail, password, roles, storesId)
     return employee;
 }
 
+async function findByRoleAndStore(role, storeId) {
+    const store = await Store.findByPk(storeId, {
+        include : {
+            model: Employee,
+            include: {
+                model: Role,
+                where : {
+                    role: role
+                }
+            }
+        }
+    });
 
+    return store.Employees;
+}
+
+
+async function findAllRoleByEmployeeId(employeeId) {
+    const roles = await Role.findAll({
+        where : {
+            EmployeeId : employeeId
+        },
+        attributes : ["role"]
+    });
+
+    return roles;
+}
 
 module.exports = {
-    create
+    create,
+    findByRoleAndStore,
+    findAllRoleByEmployeeId
 }
