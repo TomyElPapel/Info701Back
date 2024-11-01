@@ -1,4 +1,5 @@
 const { DataTypes } = require("sequelize") ;
+const ClientDeliveryStats = require("../enum/clientDeliveryStats");
 
 
 module.exports = async function(sequelize) {
@@ -20,7 +21,7 @@ module.exports = async function(sequelize) {
             clientFirstName: DataTypes.STRING,
             clientLastName: DataTypes.STRING,
             deliveryAdress: DataTypes.STRING,
-
+            stat : DataTypes.ENUM(ClientDeliveryStats.All)
         },
         {
             tableName: 'Client_Deliveries',

@@ -1,8 +1,5 @@
 const { models } = require("../src/sequelize");
-const Product = models.Product;
-const Stock = models.Stock;
-const Accessory = models.Accessory;
-const Store = models.Store;
+const { Product, Stock, Accessory, Store } = models;
 
 
 const includeColorsAndAccessory = [

@@ -1,4 +1,5 @@
 const { DataTypes } = require("sequelize") ;
+const StoreDeliveryStats = require("../enum/storeDeliveryStats");
 
 
 module.exports = async function(sequelize) {
@@ -14,7 +15,8 @@ module.exports = async function(sequelize) {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            deliveryDate: DataTypes.DATE
+            deliveryDate: DataTypes.DATE,
+            stat : DataTypes.ENUM(StoreDeliveryStats.All)
         },
         {
             tableName: 'Store_Deliveries',

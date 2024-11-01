@@ -1,7 +1,6 @@
 const { models } = require("../src/sequelize");
 
-const Accessory = models.Accessory;
-const Product = models.Product;
+const { Accessory, Product } = models;
 
 async function create(name, price) {
     return await Accessory.create({

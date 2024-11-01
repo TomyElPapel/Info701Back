@@ -1,6 +1,5 @@
 const { models } = require("../src/sequelize");
-
-const Stock = models.Stock;
+const { Stock } = models;
 
 async function addStock(storeId, productId, quantity) {
     const stock = await Stock.findOne({

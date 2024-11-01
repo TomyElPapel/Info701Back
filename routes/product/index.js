@@ -13,21 +13,6 @@ router.get("/all", async (req, res, err) => {
 });
 
 
-router.post("/", async (req, res, err) => {
-    const ref = req.body.ref;
-    const name = req.body.name;
-    const unitPrice = req.body.unitPrice;
-
-    const colors = (req.body.colors ? req.body.colors : []);
-
-    try {
-        const product = await productService.create(ref, name, unitPrice, colors);
-        res.send(201).json(product);
-    } catch(e) {
-        res.status(400).json(e);
-    }
-});
-
 router.get("/all/:storeId", async (req, res, err) => {
     const storeId = req.params.storeId;
 

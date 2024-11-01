@@ -1,37 +1,21 @@
 const express = require("express");
 const router = express.Router();
 
-const { models } = require("../src/sequelize");
+const { findAll, findById } = require("../service/storeService");
 
 router.get("/all", async (req, res, err) => {
     try {
-        const store = await models.Store.findAll();
-        res.status(200).json(store);
+        const stores = await findAll();
+        res.status(200).json(stores);
     } catch(e) {
         res.status(400).json(e);
-    }
-});
-
-
-router.post("/", async (req, res, err) => {
-    const body = req.body;
-
-    try {
-        await models.Store.create({
-            name: body.name,
-            adress : body.adress,
-        });
-
-        res.sendStatus(201);
-    } catch(e) {
-        res.status(400).json(e)
     }
 });
 
 router.get("/:id", async (req, res, err) => {
     const id = req.params.id;
     try {
-        const store = await models.Store.findByPk(id);
+        const store = await findById(id);
 
         if (store) {
             res.status(200).json(store);
