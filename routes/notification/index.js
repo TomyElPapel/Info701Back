@@ -20,5 +20,4 @@ router.get("/delivery/client/all/:employeeId", async (req, res, err) => {
 });
 
 
-
 module.exports = router;

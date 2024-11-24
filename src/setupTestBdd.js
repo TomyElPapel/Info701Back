@@ -41,7 +41,7 @@ async function createProducts(productsJson) {
     const accessoryService = require("../services/accessoryService");
 
     for (let p of productsJson) {
-        let product = await productService.create(p.ref, p.name, p.unitPrice, p.colors)
+        let product = await productService.create(p.ref, p.name, p.unitPrice, p.colors, p.imgPath);
 
         for (let s of p.stocks) {
             await stockService.setStock(s.store, product.id, s.quantity);

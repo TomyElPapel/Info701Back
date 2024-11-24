@@ -12,7 +12,8 @@ module.exports = async function(sequelize) {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            name: DataTypes.STRING
+            name: DataTypes.STRING,
+            display: DataTypes.STRING
         },
         {
             createdAt: false,

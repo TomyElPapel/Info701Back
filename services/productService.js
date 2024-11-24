@@ -1,17 +1,17 @@
 const { models } = require("../src/sequelize");
-const { Product, Stock, Accessory, Store } = models;
+const { Product, Stock, Accessory, Store, Color } = models;
 
 
 const includeColorsAndAccessory = [
-    { model : models.Color, attributes: ["name", "id"] },
-    { model : models.Accessory, attributes: ["id", "name", "price"], through : { attributes : []}}
+    { model : Color, attributes: ["name", "id", "display"] },
+    { model : Accessory, attributes: ["id", "name", "price"], through : { attributes : []}}
 ]
 
 
 const includeAll = [
-    { model: models.Stock, attributes: ["StoreId", "quantity"] },
-    { model : models.Accessory, attributes: ["id", "name", "price"], through : { attributes : []}},
-    { model: models.Color, attributes: ["id", "name"] }
+    { model: Stock, attributes: ["StoreId", "quantity"] },
+    { model : Accessory, attributes: ["id", "name", "price"], through : { attributes : []}},
+    { model: Color, attributes: ["id", "name", "display"] }
 ]   
 
 
@@ -68,16 +68,18 @@ async function findByStoreAndProduct(productId, storeId) {
 }
 
 
-async function create(ref, name, unitPrice, colors) {    
+async function create(ref, name, unitPrice, colors, imgPath) {    
     const product = await Product.create({
         ref: ref,
         name : name,
-        unitPrice : unitPrice
+        unitPrice : unitPrice,
+        imgPath : imgPath
     });
 
     for (let c of colors) {
         await product.createColor({
-            name: c
+            name: c.name,
+            display: c.display
         });
     }
 

@@ -15,7 +15,8 @@ module.exports = async function(sequelize) {
                 unique: false,
             },
             name: DataTypes.STRING,
-            unitPrice: DataTypes.FLOAT
+            unitPrice: DataTypes.FLOAT,
+            imgPath: DataTypes.STRING
         }
     );
 };
