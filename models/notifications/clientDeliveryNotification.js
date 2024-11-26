@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize") ;
 const NotificationTypes = require("../enum/notificationTypes");
-const NotificationStats = require("../enum/NotificationStats");
+const NotificationStats = require("../enum/notificationStats");
 const ClientDeliveryStats = require("../enum/clientDeliveryStats")
 
 
