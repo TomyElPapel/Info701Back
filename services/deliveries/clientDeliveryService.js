@@ -45,7 +45,7 @@ async function setDeliveryTransporterWithDate(deliveryId, transporterId, date) {
     return delivery;
 }
 
-async function setDelivetyDate(deliveryId, date) {
+async function setDeliveryDate(deliveryId, date) {
     const delivery = await ClientDelivery.findByPk(deliveryId);
     
     const preDate =  delivery.date;
@@ -120,6 +120,6 @@ module.exports = {
     create,
     findByStore,
     setDeliveryTransporterWithDate,
-    setDelivetyDate,
+    setDeliveryDate,
     findById
 }
