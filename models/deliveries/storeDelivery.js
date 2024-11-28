@@ -6,6 +6,7 @@ module.exports = async function(sequelize) {
     const Product = sequelize.models.Product;
     const Store = sequelize.models.Store;
     const Employee = sequelize.models.Employee;
+    const ClientDelivery = sequelize.models.ClientDelivery;
 
     const StoreDelivery = sequelize.define(
         'StoreDelivery',
@@ -29,5 +30,7 @@ module.exports = async function(sequelize) {
     StoreDelivery.belongsTo(Employee, { as : "Transporter" });
     StoreDelivery.belongsTo(Employee, { as : "Creator" });
 
-    StoreDelivery.belongsTo(Product, { as : "Product" });
+    StoreDelivery.belongsTo(Product);
+
+    StoreDelivery.belongsTo(ClientDelivery);
 };

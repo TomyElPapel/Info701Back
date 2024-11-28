@@ -3,7 +3,8 @@ const { models } = require("../../src/sequelize");
 const Roles = require("../../models/enum/roles");
 const EmployeeService = require("../employeeService");
 const StoreDeliveryStats = require("../../models/enum/storeDeliveryStats");
-const { StoreDelivery, Store, Employee, Product } = models;
+const ClientDeliveryService = require("./clientDeliveryService");
+const { StoreDelivery, Store, Employee, Product, ClientDelivery } = models;
 
 
 const include = [
@@ -30,12 +31,11 @@ const include = [
     {
         model: Product,
         attributes: ["id", "ref", "name", "unitPrice", "imgPath"],
-        as: "Product"
     }
 ]
 
 
-const attributes = ["id", "deliveryDate", "stat"]
+const attributes = ["id", "deliveryDate", "stat", "ClientDeliveryId"]
 
 
 
@@ -45,6 +45,28 @@ async function create(storeToId, creatorId, productId) {
         StoreToId: storeToId,
         CreatorId: creatorId, 
         ProductId: productId,
+        stat: StoreDeliveryStats.waitingForOtherStore
+    });
+
+    // TODO notif tout les RCO
+
+    await storeDelivery.reload({
+        include: include,
+        attributes: attributes
+    });
+
+    return storeDelivery;
+}
+
+
+async function createFromClientDelivery(clientDeliveryId, commercialManagerId) {
+    const clientDelivery = await ClientDelivery.findByPk(clientDeliveryId);
+
+    const storeDelivery = await StoreDelivery.create({
+        StoreToId: clientDelivery.StoreId,
+        CreatorId: commercialManagerId, 
+        ProductId: clientDelivery.ProductId,
+        ClientDeliveryId: clientDeliveryId,
         stat: StoreDeliveryStats.waitingForOtherStore
     });
 
@@ -144,6 +166,11 @@ async function confirmDelivery(deliveryId) {
         attributes: attributes
     })
 
+
+    if (storeDelivery.ClientDeliveryId) {
+        ClientDeliveryService.confirmStockForDelivery(storeDelivery.ClientDeliveryId, true);
+    }
+
     // TODO notif rco mag + vendeur
 
     return storeDelivery;
@@ -157,5 +184,6 @@ module.exports = {
     findById,
     assignDeliveryStore,
     assignTransporter,
-    confirmDelivery
+    confirmDelivery,
+    createFromClientDelivery
 }

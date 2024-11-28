@@ -8,12 +8,13 @@ const { ClientDelivery, Store, Employee, Accessory, Color, Product} = models;
 
 
 
-async function create(clientFirstName, clientLastName, adress, storeId, productId, colorId, accessoryId, creatorId) {
+async function create(clientFirstName, clientLastName, adress, description, storeId, productId, colorId, accessoryId, creatorId) {
     const delivery = await ClientDelivery.create({
         clientFirstName : clientFirstName,
         clientLastName : clientLastName,
         deliveryDate: null,
         deliveryAdress : adress,
+        description: description,
 
         StoreId : storeId,
         ProductId : productId,
@@ -22,28 +23,110 @@ async function create(clientFirstName, clientLastName, adress, storeId, productI
         CreatorId : creatorId
     });
 
+
+
+
     const commercialManagers = await EmployeeService.findByRoleAndStore(Roles.commercialManager, storeId);
     for (let cm of commercialManagers) {
         await ClientDeliveryNotificationService.create(cm.id, ClientDeliveryStats.waitingForCommercialManager, delivery.id);
         //TODO envoie mail
     }
 
+    await delivery.reload({
+        include: include,
+        attributes: attributes
+    });
 
 
     return delivery;
 }
 
-async function setDeliveryTransporterWithDate(deliveryId, transporterId, date) {
+
+async function confirmStockForDelivery(deliveryId, enoughStock) {
+    const delivery = await findById(deliveryId);
+
+    if (enoughStock) {
+        delivery.stat = ClientDeliveryStats.waitingForCompletion;
+    } else  {
+        delivery.stat = ClientDeliveryStats.waitingForProduct;
+    }
+
+    await delivery.save();
+    await delivery.reload({
+        include: include,
+        attributes: attributes
+    });
+
+    return delivery;
+}
+
+
+async function completClientDelivery(deliveryId, needModification=false, modificationNotes=null) {
+    const delivery = await findById(deliveryId);
+
+    if (needModification) {
+        delivery.needModification = needModification;
+        delivery.modificationNotes = modificationNotes;
+
+        delivery.stat = ClientDeliveryStats.waitingForAccessorist;
+    } else {
+        delivery.stat = ClientDeliveryStats.waitingForVerification;
+    }
+
+    await delivery.save();
+    await delivery.reload({
+        include: include,
+        attributes: attributes
+    });
+
+    return delivery;
+}
+
+async function modifComplet(deliveryId) {
+    const delivery = await findById(deliveryId);
+    delivery.stat = ClientDeliveryStats.waitingForVerification;
+
+    await delivery.save();
+    await delivery.reload({
+        include: include,
+        attributes: attributes
+    });
+
+    return delivery;
+}
+
+
+async function validProduct(deliveryId) {
+    const delivery = await findById(deliveryId);
+    delivery.stat = ClientDeliveryStats.waitingForTransporter;
+
+    await delivery.save();
+    await delivery.reload({
+        include: include,
+        attributes: attributes
+    });
+
+    return delivery;
+}
+
+async function assignTransporterWithDate(deliveryId, transporterId, date) {
     const delivery = await ClientDelivery.findByPk(deliveryId);
 
     //TODO notif livreur set
 
     delivery.TransporterId = transporterId;
-    delivery.date = date;
+    delivery.deliveryDate = date;
+    delivery.stat = ClientDeliveryStats.inDelivery;
+
     await delivery.save();
+    await delivery.reload({
+        include: include,
+        attributes: attributes
+    });
 
     return delivery;
 }
+
 
 async function setDeliveryDate(deliveryId, date) {
     const delivery = await ClientDelivery.findByPk(deliveryId);
@@ -62,7 +145,22 @@ async function setDeliveryDate(deliveryId, date) {
     return delivery;
 }
 
-const attributes = ["id","deliveryDate","clientFirstName", "clientLastName", "deliveryAdress", "stat", "createdAt" ]
+
+async function finishDelivery(deliveryId) {
+    const delivery = await ClientDelivery.findByPk(deliveryId);
+
+    delivery.stat = ClientDeliveryStats.delivered;
+
+    await delivery.save();
+    await delivery.reload({
+        include: include,
+        attributes: attributes
+    });
+
+    return delivery;
+}
+
+const attributes = ["id","deliveryDate","clientFirstName", "clientLastName", "deliveryAdress", "stat", "description", "needModification",  "modificationNotes", "createdAt", ]
 const include = [
     {
         model: Store,
@@ -119,7 +217,12 @@ async function findById(deliveryId) {
 module.exports = {
     create,
     findByStore,
-    setDeliveryTransporterWithDate,
+    assignTransporterWithDate,
     setDeliveryDate,
-    findById
+    findById,
+    confirmStockForDelivery,
+    completClientDelivery,
+    finishDelivery,
+    validProduct,
+    modifComplet
 }

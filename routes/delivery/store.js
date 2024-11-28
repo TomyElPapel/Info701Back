@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { create, findAll, findById, assignDeliveryStore, assignTransporter, confirmDelivery} = require("../../services/deliveries/storeDeliveryService")
+const { create, findAll, findById, createFromClientDelivery ,assignDeliveryStore, assignTransporter, confirmDelivery} = require("../../services/deliveries/storeDeliveryService")
 
 
 
@@ -14,6 +14,21 @@ router.post("/",  async (req, res, err) => {
 
     try {
         const d = await create(storeId, creatorId, productId);
+        const delivery = await findById(d.id);
+        res.status(201).json(delivery);
+    } catch(e) {
+        res.status(400).json(e)
+    }
+});
+
+router.post("/fromClientDelivery",  async (req, res, err) => {
+    const {
+        clientDeliveryId,
+        creatorId
+    } = req.body;
+
+    try {
+        const d = await createFromClientDelivery(clientDeliveryId, creatorId);
         const delivery = await findById(d.id);
         res.status(201).json(delivery);
     } catch(e) {
