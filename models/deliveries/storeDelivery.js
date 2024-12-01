@@ -16,7 +16,7 @@ module.exports = async function(sequelize) {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            deliveryDate: DataTypes.DATE,
+            deliveryDate: DataTypes.DATEONLY,
             stat : DataTypes.ENUM(StoreDeliveryStats.All)
         },
         {

@@ -1,6 +1,6 @@
 const ClientDeliveryStats = {
     waitingForCommercialManager : "waitingForCommercialManager",
-    waitingForProduct : "waitForProduct",
+    waitingForProduct : "waitingForProduct",
     waitingForCompletion : "waitingForCompletion",
     waitingForAccessorist : "waitingForAccessorist",
     waitingForVerification : "waitingForVerification",

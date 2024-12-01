@@ -101,9 +101,7 @@ async function assignDeliveryStore(deliveryId, storeId) {
         return null;
     }
 
-    console.log(storeDelivery);
-
-    if (storeDelivery.StoreToId == storeId || storeDelivery.stat != StoreDeliveryStats.waitingForOtherStore) {
+    if (storeDelivery.StoreToId == storeId) {
         return;
     }
 
@@ -124,10 +122,7 @@ async function assignTransporter(deliveryId, transporterId, deliveryDate) {
     const storeDelivery = await findById(deliveryId);
 
     if (!storeDelivery) {
-        return null;
-    }
-
-    if (storeDelivery.stat != StoreDeliveryStats.waitingTransporter) {
+        console.log("null");
         return null;
     }
 
@@ -136,6 +131,9 @@ async function assignTransporter(deliveryId, transporterId, deliveryDate) {
 
     storeDelivery.stat = StoreDeliveryStats.inDelivery;
 
+    
+    console.log(storeDelivery);
+
     await storeDelivery.save();
     await storeDelivery.reload({
         include: include,
@@ -143,6 +141,9 @@ async function assignTransporter(deliveryId, transporterId, deliveryDate) {
     })
 
     // TODO notif rco 2 store
+
+    
+    console.log(storeDelivery);
 
     return storeDelivery;
 }
@@ -157,6 +158,9 @@ async function confirmDelivery(deliveryId) {
     if (storeDelivery.stat != StoreDeliveryStats.inDelivery) {
         return null;
     }
+
+    console.log(storeDelivery);
+
 
     storeDelivery.stat = StoreDeliveryStats.delivered;
 

@@ -17,7 +17,7 @@ module.exports = async function(sequelize) {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            deliveryDate: DataTypes.DATE,
+            deliveryDate: DataTypes.DATEONLY,
             clientFirstName: DataTypes.STRING,
             clientLastName: DataTypes.STRING,
             deliveryAdress: DataTypes.STRING,

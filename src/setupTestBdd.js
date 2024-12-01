@@ -7,6 +7,7 @@ const mysql2 = require("mysql2");
 const stores = require("../json/testModel/stores.json");
 const products = require("../json/testModel/products.json");
 const employees = require("../json/testModel/employees.json");
+const Roles = require('../models/enum/roles');
 
 
 async function main() {
@@ -30,6 +31,8 @@ async function main() {
         await employeeService.create(e.firstname, e.lastname, e.age, e.mail, e.password, e.roles, storesId);
     }
 
+    await createExpertEnTout()
+
     await sequelize.close();
     console.log("Creation bdd finito");
 }
@@ -52,6 +55,19 @@ async function createProducts(productsJson) {
             await productService.addAccessory(product.id, accessory.id);
         }
     }
+}
+
+async function createExpertEnTout() {
+    const employeeService = require("../services/employeeService");
+    await employeeService.create(
+        "expert",
+        "entout",
+        69, 
+        "expert@yahoot.fr", 
+        "01022002", 
+        Roles.All, 
+        [1,2,3,4,5]
+    );
 }
 
 
