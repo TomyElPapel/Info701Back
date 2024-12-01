@@ -176,6 +176,17 @@ router.get("/waitingForVerification/:employeeId", async (req, res, err) => {
     }
 });
 
+router.get("/waitingForTransporter", async (req, res, err) => {
+
+    try {
+        const deliveries = await findWaitTransporter();
+        res.status(200).json(deliveries);
+    } catch(e) {
+        console.log(e)
+        res.status(400).json(e)
+    }
+});
+
 router.get("/finish/:employeeId", async (req, res, err) => {
     const { employeeId } = req.params
 

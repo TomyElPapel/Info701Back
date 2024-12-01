@@ -1,4 +1,6 @@
 const { models } = require("../../src/sequelize");
+const { Op, where, col, fn } = require("sequelize");
+
 
 const Roles = require("../../models/enum/roles");
 const EmployeeService = require("../employeeService");
@@ -6,33 +8,31 @@ const StoreDeliveryStats = require("../../models/enum/storeDeliveryStats");
 const ClientDeliveryService = require("./clientDeliveryService");
 const { StoreDelivery, Store, Employee, Product, ClientDelivery } = models;
 
-
-const include = [
-    {
-        model: Store,
-        attributes: ["id", "name", "adress"],
-        as: "StoreFrom"
-    },
-    {
-        model: Store,
-        attributes: ["id", "name", "adress"],
-        as: "StoreTo"
-    },
-    {
-        model: Employee,
-        as: "Creator",
-        attributes: ["id", "firstname", "lastname", "age", "mail"]
-    },
-    {
-        model: Employee,
-        as: "Transporter",
-        attributes: ["id", "firstname", "lastname", "age", "mail"]
-    },
-    {
-        model: Product,
-        attributes: ["id", "ref", "name", "unitPrice", "imgPath"],
-    }
-]
+const includeStoreFrom = {
+    model: Store,
+    attributes: ["id", "name", "adress"],
+    as: "StoreFrom"
+};
+const includeStoreTo = {
+    model: Store,
+    attributes: ["id", "name", "adress"],
+    as: "StoreTo"
+}
+const includeCreator = {
+    model: Employee,
+    as: "Creator",
+    attributes: ["id", "firstname", "lastname", "age", "mail"]
+}
+const includeTransporter = {
+    model: Employee,
+    as: "Transporter",
+    attributes: ["id", "firstname", "lastname", "age", "mail"]
+}
+const includeProduct = {
+    model: Product,
+    attributes: ["id", "ref", "name", "unitPrice", "imgPath"],
+}
+const include = [includeStoreFrom, includeStoreTo, includeCreator, includeTransporter, includeProduct];
 
 
 const attributes = ["id", "deliveryDate", "stat", "ClientDeliveryId"]
@@ -122,7 +122,6 @@ async function assignTransporter(deliveryId, transporterId, deliveryDate) {
     const storeDelivery = await findById(deliveryId);
 
     if (!storeDelivery) {
-        console.log("null");
         return null;
     }
 
@@ -131,9 +130,6 @@ async function assignTransporter(deliveryId, transporterId, deliveryDate) {
 
     storeDelivery.stat = StoreDeliveryStats.inDelivery;
 
-    
-    console.log(storeDelivery);
-
     await storeDelivery.save();
     await storeDelivery.reload({
         include: include,
@@ -141,9 +137,6 @@ async function assignTransporter(deliveryId, transporterId, deliveryDate) {
     })
 
     // TODO notif rco 2 store
-
-    
-    console.log(storeDelivery);
 
     return storeDelivery;
 }
@@ -180,6 +173,115 @@ async function confirmDelivery(deliveryId) {
     return storeDelivery;
 }
 
+async function findByEmployeeWorkplaceAndStat(employeeId, stat) {
+    const deliveries = await StoreDelivery.findAll({
+        attributes: attributes,
+        where: {
+            stat: stat
+        },
+        include: [
+            {
+                model: Store,
+                as: "StoreTo",
+                required: true,
+                attributes: ["id", "name", "adress"],
+                include: {
+                    model: Employee,
+                    required: true,
+                    where: { id: employeeId },
+                    attributes: []
+                },
+            },
+            includeCreator,includeStoreFrom,includeProduct,includeTransporter
+        ]
+    });
+
+    return deliveries;
+}
+
+async function findWaitTransporter() {
+    const deliveries = await StoreDelivery.findAll({
+        attributes: attributes,
+        where: {
+            stat: StoreDeliveryStats.waitingTransporter,
+        },
+        include: include
+    });
+
+    return deliveries;
+}
+
+async function findFuturDeliveryByTransporter(transporterId) {
+    const deliveries = await StoreDelivery.findAll({
+        attributes: attributes,
+        where: {
+            deliveryDate: {
+                [Op.gt]: new Date(),
+            },
+            TransporterId: transporterId,
+            stat: StoreDeliveryStats.inDelivery,
+        },
+        include: include
+    });
+
+    return deliveries;
+}
+
+async function findTodayDeliveryByTransporter(transporterId) {
+    const today = new Date().toISOString().split('T')[0];
+    const deliveries = await StoreDelivery.findAll({
+        attributes: attributes,
+        where: {
+            [Op.and]: [
+                where(
+                    fn('DATE', col('deliveryDate')),
+                    '=',
+                    today
+                ),
+                { stat: StoreDeliveryStats.inDelivery },
+                { TransporterId: transporterId },
+            ]
+        },
+        include: include
+    });
+
+    return deliveries;
+}
+
+async function findTodayDeliveryByWorkplace(employeeId) {
+    const today = new Date().toISOString().split('T')[0];
+    const deliveries = await StoreDelivery.findAll({
+        attributes: attributes,
+        where: {
+            [Op.and]: [
+                where(
+                    fn('DATE', col('deliveryDate')),
+                    '=',
+                    today
+                ),
+                { stat: StoreDeliveryStats.inDelivery },
+            ]
+        },
+        include: [
+            {
+                model: Store,
+                required: true,
+                as: "StoreTo",
+                attributes: ["id", "name", "adress"],
+                include: {
+                    model: Employee,
+                    required: true,
+                    where: { id: employeeId },
+                    attributes: []
+                },
+            },
+            includeCreator,includeProduct,includeTransporter
+        ]
+    });
+
+    return deliveries;
+}
+
 
 
 module.exports = {
@@ -189,5 +291,10 @@ module.exports = {
     assignDeliveryStore,
     assignTransporter,
     confirmDelivery,
-    createFromClientDelivery
+    createFromClientDelivery,
+    findByEmployeeWorkplaceAndStat,
+    findWaitTransporter,
+    findFuturDeliveryByTransporter,
+    findTodayDeliveryByWorkplace,
+    findTodayDeliveryByTransporter
 }

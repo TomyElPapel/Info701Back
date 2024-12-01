@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const { create, findAll, findById, createFromClientDelivery ,assignDeliveryStore, assignTransporter, confirmDelivery} = require("../../services/deliveries/storeDeliveryService")
+const { create, findAll, findById, createFromClientDelivery ,assignDeliveryStore, assignTransporter, confirmDelivery, findWaitTransporter, findFuturDeliveryByTransporter, findTodayDeliveryByTransporter, findTodayDeliveryByWorkplace, findByEmployeeWorkplaceAndStat} = require("../../services/deliveries/storeDeliveryService");
+const StoreDeliveryStats = require("../../models/enum/storeDeliveryStats");
 
 
 
@@ -47,23 +48,6 @@ router.get("/all", async (req, res, err) => {
     }
 });
 
-router.get("/:deliveryId", async (req, res, err) => {
-    const {deliveryId} = req.params;
-
-    try {
-        const delivery = await findById(deliveryId);
-
-        if (delivery) {
-            res.status(200).json(delivery);
-        } else {
-            res.status(404).json({msg: "no delivery with id"})
-        }
-    } catch(e) {
-        console.log(e)
-
-        res.status(400).json(e)
-    }
-});
 
 router.post("/assignStore", async (req, res, err) => {
     const {
@@ -104,6 +88,84 @@ router.post("/confirmDelivery", async (req, res, err) => {
         const delivery = await confirmDelivery(deliveryId);
         res.status(200).json(delivery);
     } catch(e) {
+        res.status(400).json(e)
+    }
+});
+
+router.get("/waitingForStore/:employeeId", async (req, res, err) => {
+    const { employeeId } = req.params;
+
+    try {
+        const delivery = await findByEmployeeWorkplaceAndStat(employeeId, StoreDeliveryStats.waitingForOtherStore);
+        res.status(200).json(delivery);
+    } catch(e) {
+        res.status(400).json(e)
+    }
+});
+
+router.get("/waitingForTransporter", async (req, res, err) => {
+    try {
+        const deliveries = await findWaitTransporter();
+        res.status(200).json(deliveries);
+    } catch(e) {
+        console.log(e)
+        res.status(400).json(e)
+    }
+});
+
+router.get("/futureDeliveries/byTransporter/:transporterId", async (req, res, err) => {
+    const { transporterId } = req.params
+
+    try {
+        const deliveries = await findFuturDeliveryByTransporter(transporterId);
+        res.status(200).json(deliveries);
+    } catch(e) {
+        console.log(e)
+        res.status(400).json(e)
+    }
+});
+
+
+router.get("/todayDeliveries/byTransporter/:transporterId", async (req, res, err) => {
+    const { transporterId } = req.params
+
+    try {
+        const deliveries = await findTodayDeliveryByTransporter(transporterId);
+        res.status(200).json(deliveries);
+    } catch(e) {
+        console.log(e)
+        res.status(400).json(e)
+    }
+});
+
+
+router.get("/todayDeliveries/byWorkplace/:employeeId", async (req, res, err) => {
+    const { employeeId } = req.params
+
+    try {
+        const deliveries = await findTodayDeliveryByWorkplace(employeeId);
+        res.status(200).json(deliveries);
+    } catch(e) {
+        console.log(e)
+        res.status(400).json(e)
+    }
+});
+
+
+router.get("/:deliveryId", async (req, res, err) => {
+    const {deliveryId} = req.params;
+
+    try {
+        const delivery = await findById(deliveryId);
+
+        if (delivery) {
+            res.status(200).json(delivery);
+        } else {
+            res.status(404).json({msg: "no delivery with id"})
+        }
+    } catch(e) {
+        console.log(e)
+
         res.status(400).json(e)
     }
 });
