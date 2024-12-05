@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { create, findAll, findById, createFromClientDelivery ,assignDeliveryStore, assignTransporter, confirmDelivery, findWaitTransporter, findFuturDeliveryByTransporter, findTodayDeliveryByTransporter, findTodayDeliveryByWorkplace, findByEmployeeWorkplaceAndStat} = require("../../services/deliveries/storeDeliveryService");
+const { create, findAll, findById, createFromClientDelivery ,assignDeliveryStore, findByStat, assignTransporter, confirmDelivery, findWaitTransporter, findFuturDeliveryByTransporter, findTodayDeliveryByTransporter, findTodayDeliveryByWorkplace, findByEmployeeWorkplaceAndStat} = require("../../services/deliveries/storeDeliveryService");
 const StoreDeliveryStats = require("../../models/enum/storeDeliveryStats");
 
 
@@ -96,9 +96,10 @@ router.get("/waitingForStore/:employeeId", async (req, res, err) => {
     const { employeeId } = req.params;
 
     try {
-        const delivery = await findByEmployeeWorkplaceAndStat(employeeId, StoreDeliveryStats.waitingForOtherStore);
+        const delivery = await findByStat(StoreDeliveryStats.waitingForOtherStore);
         res.status(200).json(delivery);
     } catch(e) {
+        console.log(e)
         res.status(400).json(e)
     }
 });

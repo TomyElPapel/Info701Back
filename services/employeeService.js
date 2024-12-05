@@ -76,6 +76,10 @@ async function findEmployeeByMailAndPassword(mail, password) {
         ]
     })
 
+    if (!e) {
+        return null;
+    }
+
     const employee = {
         id: e.id,
         firstname: e.firstname,

@@ -6,7 +6,7 @@ const Roles = require("../../models/enum/roles");
 const EmployeeService = require("../employeeService");
 const StoreDeliveryStats = require("../../models/enum/storeDeliveryStats");
 const ClientDeliveryService = require("./clientDeliveryService");
-const { StoreDelivery, Store, Employee, Product, ClientDelivery } = models;
+const { StoreDelivery, Store, Employee, Product, ClientDelivery, WorkPlace } = models;
 
 const includeStoreFrom = {
     model: Store,
@@ -199,6 +199,18 @@ async function findByEmployeeWorkplaceAndStat(employeeId, stat) {
     return deliveries;
 }
 
+async function findByStat(stat) {
+    const deliveries = await StoreDelivery.findAll({
+        attributes: attributes,
+        where: {
+            stat: stat,
+        },
+        include: include,
+    });
+
+    return deliveries;
+}
+
 async function findWaitTransporter() {
     const deliveries = await StoreDelivery.findAll({
         attributes: attributes,
@@ -296,5 +308,6 @@ module.exports = {
     findWaitTransporter,
     findFuturDeliveryByTransporter,
     findTodayDeliveryByWorkplace,
-    findTodayDeliveryByTransporter
+    findTodayDeliveryByTransporter,
+    findByStat
 }
